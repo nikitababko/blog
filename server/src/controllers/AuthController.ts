@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 
 import UserModel from '../models/UserModel';
 import { generateActiveToken } from '../config/generateToken';
+import sendMail from '../config/sendMail';
+import { validateEmail } from '../middleware/valid';
 
 const AuthController = {
   register: async (req: Request, res: Response) => {
@@ -28,12 +30,13 @@ const AuthController = {
 
       const active_token = generateActiveToken({ newUser });
 
-      res.json({
-        status: 'OK',
-        message: 'Register succesfully.',
-        data: newUser,
-        active_token,
-      });
+      const CLIENT_URL = `${process.env.CLIENT_URL}`;
+      const url = `${CLIENT_URL}/active/${active_token}`;
+
+      if (validateEmail(account)) {
+        sendMail(account, url, 'Verify your email address.');
+        return res.json({ msg: 'Success! Please check your email.' });
+      }
     } catch (error) {
       return res.status(500).json({
         message: error.message,
