@@ -11,6 +11,10 @@
 - Added ability: logout
 - Added: refresh_token
 
+### [d796d88](https://github.com/nikitababko/blog/commit/d796d889fd7158c9cfeb5b41d3b4a24f612bc5f1)
+
+- Setup client
+
 ## 2021-07-18
 
 ### [ab926f7](https://github.com/nikitababko/blog/commit/ab926f7175cabb2edc170f939fcef0254495fbeb)
