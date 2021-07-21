@@ -20,6 +20,10 @@
 - Added components: Header and Footer
 - Added routing
 
+### [478bc07](https://github.com/nikitababko/blog/commit/478bc07d4cc1559e3966fc9d3b8e87cf8bd621f5)
+
+- Added login page
+
 ## 2021-07-18
 
 ### [ab926f7](https://github.com/nikitababko/blog/commit/ab926f7175cabb2edc170f939fcef0254495fbeb)
