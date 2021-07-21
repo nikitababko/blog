@@ -5,6 +5,12 @@
 - Added ability: jwt activation account
 - Added ability: SMS registration
 
+### [5b208b9](https://github.com/nikitababko/blog/commit/5b208b93548baec40121facddcac43f85497def6)
+
+- Added ability: login
+- Added ability: logout
+- Added: refresh_token
+
 ## 2021-07-18
 
 ### [ab926f7](https://github.com/nikitababko/blog/commit/ab926f7175cabb2edc170f939fcef0254495fbeb)
