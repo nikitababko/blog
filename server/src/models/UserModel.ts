@@ -4,22 +4,21 @@ const UserSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, 'Please add your name.'],
+      required: [true, 'Please add your name'],
       trim: true,
       maxLength: [20, 'Your name is up to 20 chars long.'],
     },
 
     account: {
       type: String,
-      required: [true, 'Please add your email or phone.'],
+      required: [true, 'Please add your email or phone'],
       trim: true,
       unique: true,
     },
 
     password: {
       type: String,
-      required: [true, 'Please add your password.'],
-      trim: true,
+      required: [true, 'Please add your password'],
     },
 
     avatar: {
@@ -30,12 +29,12 @@ const UserSchema = new Schema(
 
     role: {
       type: String,
-      default: 'user',
+      defaul: 'user',
     },
 
     type: {
       type: String,
-      default: 'normal',
+      defaul: 'normal',
     },
   },
   {
