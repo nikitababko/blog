@@ -1,4 +1,5 @@
 import { Schema, Types, model } from 'mongoose';
+import { IUser } from '../config/interface';
 
 const UserSchema = new Schema(
   {
@@ -29,12 +30,12 @@ const UserSchema = new Schema(
 
     role: {
       type: String,
-      defaul: 'user',
+      default: 'user',
     },
 
     type: {
       type: String,
-      defaul: 'normal',
+      default: 'register',
     },
   },
   {
@@ -42,4 +43,4 @@ const UserSchema = new Schema(
   }
 );
 
-export default model('User', UserSchema);
+export default model<IUser>('User', UserSchema);

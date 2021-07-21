@@ -3,11 +3,15 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import UserModel from '../models/UserModel';
-import { generateActiveToken } from '../config/generateToken';
+import {
+  generateAccessToken,
+  generateActiveToken,
+  generateRefreshToken,
+} from '../config/generateToken';
 import sendMail from '../config/sendMail';
 import { validateEmail, validPhone } from '../middleware/valid';
 import { sendSMS } from '../config/sendSMS';
-import { IDecodedToken } from '../config/interface';
+import { IDecodedToken, IUser } from '../config/interface';
 
 const AuthController = {
   register: async (req: Request, res: Response) => {
@@ -80,6 +84,89 @@ const AuthController = {
       }
 
       return res.status(500).json({ message: errorMessage });
+    }
+  },
+
+  login: async (req: Request, res: Response) => {
+    try {
+      const { account, password } = req.body;
+
+      const user = await UserModel.findOne({ account });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: 'This account does not exits.' });
+      }
+
+      // if user exists
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Password is incorrect.' });
+      }
+
+      const access_token = generateAccessToken({ id: user._id });
+      const refresh_token = generateRefreshToken({ id: user._id });
+
+      res.cookie('refreshtoken', refresh_token, {
+        httpOnly: true,
+        path: `/api/refresh_token`,
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+      });
+
+      res.json({
+        message: 'Login Success!',
+        access_token,
+        user: { ...user._doc, password: '' },
+      });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+
+  logout: async (req: Request, res: Response) => {
+    try {
+      res.clearCookie('refreshtoken', {
+        path: `/api/refresh_token`,
+      });
+      return res.json({
+        message: 'Logged out!',
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message,
+      });
+    }
+  },
+
+  refreshToken: async (req: Request, res: Response) => {
+    try {
+      const rf_token = req.cookies.refreshtoken;
+      if (!rf_token)
+        return res.status(400).json({ message: 'Please login now!' });
+
+      const decoded = <IDecodedToken>(
+        jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`)
+      );
+      if (!decoded.id) {
+        return res.status(400).json({ message: 'Please login now!' });
+      }
+
+      const user = await UserModel.findById(decoded.id).select(
+        '-password'
+      );
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: 'This account does not exist.' });
+      }
+
+      const access_token = generateAccessToken({ id: user._id });
+
+      res.json({ access_token });
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message,
+      });
     }
   },
 };
