@@ -15,6 +15,11 @@
 
 - Setup client
 
+### [23be223](https://github.com/nikitababko/blog/commit/23be22317173265827a3390c362a535acbb9715a)
+
+- Added components: Header and Footer
+- Added routing
+
 ## 2021-07-18
 
 ### [ab926f7](https://github.com/nikitababko/blog/commit/ab926f7175cabb2edc170f939fcef0254495fbeb)
