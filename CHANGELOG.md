@@ -1,3 +1,9 @@
+## 2021-07-22
+
+### [b82fa69](https://github.com/nikitababko/blog/commit/b82fa6969c6186842ac83c3f31c2f70bb4bc962d)
+
+- Setup redux for login
+
 ## 2021-07-21
 
 ### [af32f40](https://github.com/nikitababko/blog/commit/af32f40d740e6c00e4982296f1aa11532e101ff8)
