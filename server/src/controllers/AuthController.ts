@@ -168,7 +168,10 @@ const AuthController = {
 
       const access_token = generateAccessToken({ id: user._id });
 
-      res.json({ access_token });
+      res.json({
+        access_token,
+        user,
+      });
     } catch (err: any) {
       return res.status(500).json({
         msg: err.message,
