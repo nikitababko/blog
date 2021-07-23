@@ -25,4 +25,19 @@
       opacity: 0.5;
     }
   }
+
+  input {
+    &::placeholder {
+      opacity: 0.5;
+      font-size: 80%;
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
