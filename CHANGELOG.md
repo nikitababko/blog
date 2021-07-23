@@ -8,6 +8,10 @@
 
 - Added ability: account activation
 
+### [0d565ad](https://github.com/nikitababko/blog/commit/0d565ad61d3a88d0ff4fb3e8c7854b1f0319fc17)
+
+- Added ability: refresh_token => logout
+
 ## 2021-07-22
 
 ### [b82fa69](https://github.com/nikitababko/blog/commit/b82fa6969c6186842ac83c3f31c2f70bb4bc962d)
