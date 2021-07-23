@@ -4,6 +4,10 @@
 
 - Added ability: register
 
+### [058c15c](https://github.com/nikitababko/blog/commit/058c15c2b0d8c916cbc3f4edd581e0c38c54f750)
+
+- Added ability: account activation
+
 ## 2021-07-22
 
 ### [b82fa69](https://github.com/nikitababko/blog/commit/b82fa6969c6186842ac83c3f31c2f70bb4bc962d)
