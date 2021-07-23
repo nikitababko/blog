@@ -22,7 +22,7 @@ const AuthController = {
 
       if (user) {
         return res.status(400).json({
-          message: 'Email or phone number already exists.',
+          msg: 'Email or phone number already exists.',
         });
       }
 
@@ -41,14 +41,14 @@ const AuthController = {
 
       if (validateEmail(account)) {
         sendMail(account, url, 'Verify your email address.');
-        return res.json({ message: 'Success! Please check your email.' });
+        return res.json({ msg: 'Success! Please check your email.' });
       } else if (validPhone(account)) {
         sendSMS(account, url, 'Verify your phone number');
-        return res.json({ message: 'Success! Please check your phone.' });
+        return res.json({ msg: 'Success! Please check your phone.' });
       }
-    } catch (error) {
+    } catch (err: any) {
       return res.status(500).json({
-        message: error.message,
+        msg: err.message,
       });
     }
   },
@@ -63,27 +63,31 @@ const AuthController = {
 
       const { newUser } = decoded;
 
-      if (!newUser)
-        return res
-          .status(400)
-          .json({ message: 'Invalid authentication.' });
-
-      const user = new UserModel(newUser);
-
-      await user.save();
-
-      res.json({ message: 'Account has been activated!' });
-    } catch (error) {
-      let errorMessage;
-
-      if (error.code === 11000) {
-        errorMessage = Object.keys(error.keyValue)[0] + ' already exists.';
-      } else {
-        let name = Object.keys(error.errors)[0];
-        errorMessage = error.errors[`${name}`].message;
+      if (!newUser) {
+        return res.status(400).json({
+          msg: 'Invalid authentication.',
+        });
       }
 
-      return res.status(500).json({ message: errorMessage });
+      const user = await UserModel.findOne({
+        account: newUser.account,
+      });
+      if (user)
+        return res.status(400).json({
+          msg: 'Account already exists.',
+        });
+
+      const new_user = new UserModel(newUser);
+
+      await new_user.save();
+
+      res.json({
+        msg: 'Account has been activated!',
+      });
+    } catch (err: any) {
+      return res.status(500).json({
+        msg: err.message,
+      });
     }
   },
 
@@ -95,13 +99,13 @@ const AuthController = {
       if (!user) {
         return res
           .status(400)
-          .json({ message: 'This account does not exits.' });
+          .json({ msg: 'This account does not exits.' });
       }
 
       // if user exists
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(400).json({ message: 'Password is incorrect.' });
+        return res.status(400).json({ msg: 'Password is incorrect.' });
       }
 
       const access_token = generateAccessToken({ id: user._id });
@@ -114,12 +118,14 @@ const AuthController = {
       });
 
       res.json({
-        message: 'Login Success!',
+        msg: 'Login Success!',
         access_token,
         user: { ...user._doc, password: '' },
       });
-    } catch (error) {
-      return res.status(500).json({ message: error.message });
+    } catch (err: any) {
+      return res.status(500).json({
+        msg: err.message,
+      });
     }
   },
 
@@ -131,9 +137,9 @@ const AuthController = {
       return res.json({
         message: 'Logged out!',
       });
-    } catch (error) {
+    } catch (err: any) {
       return res.status(500).json({
-        message: error.message,
+        msg: err.message,
       });
     }
   },
@@ -163,9 +169,9 @@ const AuthController = {
       const access_token = generateAccessToken({ id: user._id });
 
       res.json({ access_token });
-    } catch (error) {
+    } catch (err: any) {
       return res.status(500).json({
-        message: error.message,
+        msg: err.message,
       });
     }
   },

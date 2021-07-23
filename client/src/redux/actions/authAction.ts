@@ -19,20 +19,17 @@ export const login =
 
       dispatch({
         type: AUTH,
-        payload: {
-          token: res.data.access_token,
-          user: res.data.user,
-        },
+        payload: res.data,
       });
 
       dispatch({
         type: ALERT,
-        payload: { success: 'Login Success!' },
+        payload: { success: res.data.msg },
       });
-    } catch (error: any) {
+    } catch (err: any) {
       dispatch({
         type: ALERT,
-        payload: { errors: error.response.data.message },
+        payload: { errors: err.response.data.msg },
       });
     }
   };
@@ -42,10 +39,10 @@ export const register =
   async (dispatch: Dispatch<IAuthType | IAlertType>) => {
     const check = validRegister(userRegister);
 
-    if (check.errorLength > 0) {
+    if (check.errLength > 0) {
       return dispatch({
         type: ALERT,
-        payload: { errors: check.errorMessage },
+        payload: { errors: check.errMsg },
       });
     }
 
@@ -59,13 +56,13 @@ export const register =
 
       dispatch({
         type: ALERT,
-        payload: { success: res.data.message },
+        payload: { success: res.data.msg },
       });
-    } catch (error: any) {
+    } catch (err: any) {
       dispatch({
         type: ALERT,
         payload: {
-          errors: error.response.data.message,
+          errors: err.response.data.msg,
         },
       });
     }

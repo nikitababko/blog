@@ -23,8 +23,8 @@ export const validRegister = (userRegister: IUserRegister) => {
   }
 
   return {
-    errorMessage: errors,
-    errorLength: errors.length,
+    errMsg: errors,
+    errLength: errors.length,
   };
 };
 
