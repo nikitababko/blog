@@ -1,3 +1,9 @@
+## 2021-07-24
+
+### [3911fc1](https://github.com/nikitababko/blog/commit/3911fc18921da02f89799a1edb9f951a81d73eb9)
+
+- Added ability: login with google
+
 ## 2021-07-23
 
 ### [d9d34ad](https://github.com/nikitababko/blog/commit/d9d34adfb78946c9adbda65a6d9a7c6e53d57831)
