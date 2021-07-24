@@ -3,13 +3,11 @@
     opacity: 0.1;
   }
 }
-
 @keyframes dash {
   to {
     stroke-dashoffset: 234;
   }
 }
-
 .loading {
   display: flex;
   justify-content: center;

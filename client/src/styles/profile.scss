@@ -1,0 +1,70 @@
+.profile_info {
+  background: #fff;
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 2.5rem 1.7rem;
+
+  .pass {
+    position: relative;
+
+    small {
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      opacity: 0.5;
+    }
+  }
+
+  .info_avatar {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    span {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      text-align: center;
+      color: crimson;
+      transition: 0.3s ease-in-out;
+      background: #fff5;
+    }
+
+    &:hover {
+      span {
+        bottom: -15%;
+      }
+    }
+
+    #file_up {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+}
+
+::-webkit-file-upload-button {
+  cursor: pointer;
+}

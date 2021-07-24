@@ -51,7 +51,10 @@ const Menu = () => {
 
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <Link className="dropdown-item" to="/profile">
+              <Link
+                className="dropdown-item"
+                to={`/profile/${auth.user._id}`}
+              >
                 Profile
               </Link>
             </li>

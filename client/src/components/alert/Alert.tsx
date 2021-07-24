@@ -4,8 +4,6 @@ import { RootStore } from '../../utils/TypeScript';
 import Loading from './Loading';
 import Toast from './Toast';
 
-import './Alert.scss';
-
 export const Alert = () => {
   const { alert } = useSelector((state: RootStore) => state);
 

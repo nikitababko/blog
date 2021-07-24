@@ -171,6 +171,7 @@ const AuthController = {
   googleLogin: async (req: Request, res: Response) => {
     try {
       const { id_token } = req.body;
+      console.log(id_token);
       const verify = await client.verifyIdToken({
         idToken: id_token,
         audience: `${process.env.MAIL_CLIENT_ID}`,

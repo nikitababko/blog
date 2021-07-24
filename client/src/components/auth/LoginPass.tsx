@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 import { InputChange, FormSubmit } from 'utils/TypeScript';
 import { login } from 'redux/actions/authAction';
 
-import './Auth.scss';
-
 const LoginPass = () => {
   const initialState = { account: '', password: '' };
   const [userLogin, setUserLogin] = useState(initialState);

@@ -21,3 +21,11 @@ code {
   transform: translateY(-3px);
   border-radius: 50%;
 }
+
+@import './auth.scss';
+
+@import './loading.scss';
+
+@import './alert.scss';
+
+@import './profile.scss';

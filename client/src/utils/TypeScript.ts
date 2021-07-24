@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent } from 'react';
-import rootReducer from '../redux/reducers/index';
+import rootReducer from 'redux/reducers/index';
 
 export type InputChange = ChangeEvent<HTMLInputElement>;
 
@@ -30,6 +30,10 @@ export interface IUser extends IUserLogin {
   type: string;
   updatedAt: string;
   _id: string;
+}
+
+export interface IUserProfile extends IUserRegister {
+  avatar: string | File;
 }
 
 export interface IAlert {
