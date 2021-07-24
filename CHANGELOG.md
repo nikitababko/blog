@@ -4,6 +4,10 @@
 
 - Added ability: login with google
 
+### [dba7c1c](https://github.com/nikitababko/blog/commit/dba7c1c150c69f4533843256814adbf705c0938e)
+
+- Added ability: login with facebook
+
 ## 2021-07-23
 
 ### [d9d34ad](https://github.com/nikitababko/blog/commit/d9d34adfb78946c9adbda65a6d9a7c6e53d57831)
