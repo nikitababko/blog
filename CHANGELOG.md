@@ -12,6 +12,10 @@
 
 - Added ability: login with SMS
 
+### [356f2b9](https://github.com/nikitababko/blog/commit/356f2b9b10c32db8621c118005b18fa75e1317db)
+
+- Added profile user info
+
 ## 2021-07-23
 
 ### [d9d34ad](https://github.com/nikitababko/blog/commit/d9d34adfb78946c9adbda65a6d9a7c6e53d57831)
