@@ -11,7 +11,16 @@ import {
 import sendMail from '../config/sendMail';
 import { validateEmail, validPhone } from '../middleware/valid';
 import { sendSMS } from '../config/sendSMS';
-import { IDecodedToken, IUser } from '../config/interface';
+import {
+  IDecodedToken,
+  IUser,
+  IGgPayload,
+  IUserParams,
+} from '../config/interface';
+
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(`${process.env.MAIL_CLIENT_ID}`);
 
 const AuthController = {
   register: async (req: Request, res: Response) => {
@@ -96,36 +105,15 @@ const AuthController = {
       const { account, password } = req.body;
 
       const user = await UserModel.findOne({ account });
-      if (!user) {
+      if (!user)
         return res
           .status(400)
           .json({ msg: 'This account does not exits.' });
-      }
 
       // if user exists
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({ msg: 'Password is incorrect.' });
-      }
-
-      const access_token = generateAccessToken({ id: user._id });
-      const refresh_token = generateRefreshToken({ id: user._id });
-
-      res.cookie('refreshtoken', refresh_token, {
-        httpOnly: true,
-        path: `/api/refresh_token`,
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
-      });
-
-      res.json({
-        msg: 'Login Success!',
-        access_token,
-        user: { ...user._doc, password: '' },
-      });
+      loginUser(user, password, res);
     } catch (err: any) {
-      return res.status(500).json({
-        msg: err.message,
-      });
+      return res.status(500).json({ msg: err.message });
     }
   },
 
@@ -178,6 +166,84 @@ const AuthController = {
       });
     }
   },
+
+  googleLogin: async (req: Request, res: Response) => {
+    try {
+      const { id_token } = req.body;
+      const verify = await client.verifyIdToken({
+        idToken: id_token,
+        audience: `${process.env.MAIL_CLIENT_ID}`,
+      });
+
+      const { email, email_verified, name, picture } = <IGgPayload>(
+        verify.getPayload()
+      );
+
+      if (!email_verified)
+        return res.status(500).json({ msg: 'Email verification failed.' });
+
+      const password = email + process.env.MAIL_CLIENT_SECRET;
+      const passwordHash = await bcrypt.hash(password, 12);
+
+      const user = await UserModel.findOne({ account: email });
+
+      if (user) {
+        loginUser(user, password, res);
+      } else {
+        const user = {
+          name,
+          account: email,
+          password: passwordHash,
+          avatar: picture,
+          type: 'login',
+        };
+        registerUser(user, res);
+      }
+    } catch (err: any) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+};
+
+const loginUser = async (user: IUser, password: string, res: Response) => {
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch)
+    return res.status(400).json({ msg: 'Password is incorrect.' });
+
+  const access_token = generateAccessToken({ id: user._id });
+  const refresh_token = generateRefreshToken({ id: user._id });
+
+  res.cookie('refreshtoken', refresh_token, {
+    httpOnly: true,
+    path: `/api/refresh_token`,
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+  });
+
+  res.json({
+    msg: 'Login Success!',
+    access_token,
+    user: { ...user._doc, password: '' },
+  });
+};
+
+const registerUser = async (user: IUserParams, res: Response) => {
+  const newUser = new UserModel(user);
+  await newUser.save();
+
+  const access_token = generateAccessToken({ id: newUser._id });
+  const refresh_token = generateRefreshToken({ id: newUser._id });
+
+  res.cookie('refreshtoken', refresh_token, {
+    httpOnly: true,
+    path: `/api/refresh_token`,
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+  });
+
+  res.json({
+    msg: 'Login Success!',
+    access_token,
+    user: { ...newUser._doc, password: '' },
+  });
 };
 
 export default AuthController;
