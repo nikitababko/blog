@@ -18,4 +18,8 @@ router.post('/google_login', AuthController.googleLogin);
 
 router.post('/facebook_login', AuthController.facebookLogin);
 
+router.post('/login_sms', AuthController.loginSMS);
+
+router.post('/sms_verify', AuthController.smsVerify);
+
 export default router;
