@@ -1,3 +1,9 @@
+## 2021-07-25
+
+### [ad65fc2](https://github.com/nikitababko/blog/commit/ad65fc2b020140fa6134baa105b7d3513026a0bb)
+
+- Added ability: upload avatar to cloudinary
+
 ## 2021-07-24
 
 ### [3911fc1](https://github.com/nikitababko/blog/commit/3911fc18921da02f89799a1edb9f951a81d73eb9)
