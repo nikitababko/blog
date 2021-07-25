@@ -4,6 +4,10 @@
 
 - Added ability: upload avatar to cloudinary
 
+### [69a81ee](https://github.com/nikitababko/blog/commit/69a81eec8354a47c9be1993720525bd8f28af687)
+
+- Added ability: update user info
+
 ## 2021-07-24
 
 ### [3911fc1](https://github.com/nikitababko/blog/commit/3911fc18921da02f89799a1edb9f951a81d73eb9)
