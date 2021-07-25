@@ -8,6 +8,10 @@
 
 - Added ability: update user info
 
+### [af0a086](https://github.com/nikitababko/blog/commit/af0a086fb8c07208b94cafdf8c5fa5637e2c3db2)
+
+- Added ability: reset password
+
 ## 2021-07-24
 
 ### [3911fc1](https://github.com/nikitababko/blog/commit/3911fc18921da02f89799a1edb9f951a81d73eb9)
