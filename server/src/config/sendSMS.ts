@@ -7,7 +7,7 @@ const serviceID = `${process.env.TWILIO_SERVICE_ID}`;
 
 const client = new Twilio(accountSid, authToken);
 
-export const sendSMS = (to: string, body: string, text: string) => {
+export const sendSms = (to: string, body: string, text: string) => {
   try {
     client.messages
       .create({

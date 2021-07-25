@@ -12,7 +12,6 @@ const Footer = () => {
       >
         https://github.com/nikitababko
       </a>
-      <p> Copyright &copy; 2021</p>
     </div>
   );
 };
