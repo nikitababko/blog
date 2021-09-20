@@ -1,3 +1,9 @@
+## 2021-09-20
+
+### [99d215e](https://github.com/nikitababko/blog/commit/99d215e027e9634c707b822e79d0125ef0377ee3)
+
+- Added initial functionality for categories actions: create, get, update and delete
+
 ## 2021-07-25
 
 ### [ad65fc2](https://github.com/nikitababko/blog/commit/ad65fc2b020140fa6134baa105b7d3513026a0bb)
