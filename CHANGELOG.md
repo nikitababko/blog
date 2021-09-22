@@ -1,5 +1,11 @@
 ## 2021-09-20
 
+### [b514c63](https://github.com/nikitababko/blog/commit/b514c633704b91c0d4a7d67ca4dfb39556d886b5)
+
+- Added action: create and get categories on client
+
+## 2021-09-20
+
 ### [99d215e](https://github.com/nikitababko/blog/commit/99d215e027e9634c707b822e79d0125ef0377ee3)
 
 - Added initial functionality for categories actions: create, get, update and delete
