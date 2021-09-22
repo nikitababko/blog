@@ -37,6 +37,14 @@ const Menu = () => {
         </li>
       ))}
 
+      {auth.user?.role === 'admin' && (
+        <li className={`nav-item ${isActive('/category')}`}>
+          <Link to="/category" className="nav-link">
+            Category
+          </Link>
+        </li>
+      )}
+
       {auth.user && (
         <li className="nav-item dropdown">
           <span
@@ -51,10 +59,7 @@ const Menu = () => {
 
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <Link
-                className="dropdown-item"
-                to={`/profile/${auth.user._id}`}
-              >
+              <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
                 Profile
               </Link>
             </li>
