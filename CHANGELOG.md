@@ -1,3 +1,10 @@
+## 2021-10-22
+
+### [b5dacac](https://github.com/nikitababko/blog/commit/b5dacac72ef164b8c3b0a14dd3c05f1de8419a6e)
+
+- Added action: update and delete category on client.
+
+
 ## 2021-09-22
 
 ### [b514c63](https://github.com/nikitababko/blog/commit/b514c633704b91c0d4a7d67ca4dfb39556d886b5)
