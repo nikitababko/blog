@@ -1,9 +1,14 @@
+## 2021-10-28
+
+### [90748fc](https://github.com/nikitababko/blog/commit/90748fcdd5414530229c48747f1d3586db7e8c4a)
+
+- Added page 'Create blog'.
+
 ## 2021-10-22
 
 ### [b5dacac](https://github.com/nikitababko/blog/commit/b5dacac72ef164b8c3b0a14dd3c05f1de8419a6e)
 
 - Added action: update and delete category on client.
-
 
 ## 2021-09-22
 
